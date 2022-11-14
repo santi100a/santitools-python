@@ -100,3 +100,9 @@ Returns a pseudo-random item from the list, tuple or set specified as an argumen
     """
     assert type(iter) in [list, tuple, set]
     return iter[random(len(iter) - 1)]
+def invert(n: float) -> float:
+    """
+    Return the multiplicative inverse of the given number.
+    """
+    assert type(n) == float
+    return 1.0 / n
