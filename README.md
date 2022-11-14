@@ -10,3 +10,5 @@ These utilities are:
 - **Time (```time.py```):** A time API that's very similar to JavaScript's ```Date``` object.
 - **Screen Clear (```__init__.py```):** A function to easily clear the screen, by using 1 of 2 methods: the ```os``` module's ```system``` function or an ANSI escape sequence.
 - **Bisect (```__init__.py```):** A binary-search algorithm as a function. It's useful for finding a value in a sorted list, with a logarithmic time complexity.
+It so happens I just packaged this project, so now you can install it with the command
+```pip install santitools```. Try it out!
