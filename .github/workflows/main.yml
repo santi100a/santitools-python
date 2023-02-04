@@ -25,6 +25,8 @@ jobs:
       - name: Install Pytest
         run: |
           pip install pytest==7.2.1
+      - name: Install the project in editable mode
+        run: pip install -e .
       - name: Run Pytest
         run: |
           pytest tests
