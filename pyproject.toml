@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "santitools"
+version = "1.0.4"
+license = "MIT"
+authors = [
+  { name="Santiago Rojas", email="santyrojasprieto9+pypi@gmail.com" },
+]
+description = "Santi's Tools: useful APIs for every Python dev!"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/santi100a/santitools-python"
+"Bug Tracker" = "https://github.com/santi100a/santitools-python/issues"
