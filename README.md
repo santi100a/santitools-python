@@ -1,4 +1,9 @@
 # Santi's Tools
+[![Build Status](https://github.com/santi100a/santitools-python/actions/workflows/main.yml/badge.svg)](https://github.com/santi100a/santitools-python/actions)
+[![GitHub stars](https://img.shields.io/github/stars/santi100a/santitools-python.svg?style=flat-square)](https://github.com/santi100a/santitools-python)
+[![License](https://img.shields.io/github/license/santi100a/santitools-python.svg?style=flat-square)](https://github.com/santi100a/santitools-python)
+
+
 
 This repo contains a set of Python tools and APIs that I use for personal projects.
 
