@@ -30,13 +30,6 @@ jobs:
       - name: Run Pytest
         run: |
           pytest tests
-      - name: Package distributions
-        run: tar -cf dist.tar dist 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: dist
-          path: dist.tar
   build: 
     runs-on: ubuntu-latest
     needs: test
