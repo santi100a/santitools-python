@@ -1,4 +1,4 @@
-import santitools.filesystem as fs, pytest
+import santitools.filesystem as fs
 
 READ_PATH = './example.txt'
 WRITE_PATH = './written.txt'

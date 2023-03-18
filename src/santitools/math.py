@@ -17,7 +17,7 @@ The Euler constant up to its 16th digit.
 
 def sqrt(n: float | int) -> float:
     assert type(n) in NUM_CLASSES_ARRAY
-    return n ** 1/2
+    return n ** 0.5
 
 def random(mx: int, mn: int = 0) -> int:
     """
@@ -134,9 +134,11 @@ def invert(n: float | int) -> float:
 
 def rootn(n: float | int, r: int = 2):
     """
-    Returns the `r`th root of `n`. Default is square root (r = 2). 
+    Returns the `r`th root of `n`. Default is square root (`r` = 2). 
     """
-    assert type(n) in NUM_CLASSES_ARRAY and type(r) == int
+    assert type(n) in [*NUM_CLASSES_ARRAY, complex]
+    assert type(r) == int
+    assert r > 0
     return n ** invert(r)
 
 def cbrt(n: float | int):
@@ -199,9 +201,10 @@ def arithmetic_progression(f: int | float, l: int | float, n = None) -> int:
     """
     Returns the sum of all numbers in the range [`f`, `l`].
     """
-    le = len(range(f, l + 1))
-    assert  type(f) in NUM_CLASSES_ARRAY and \
-    type(l) in NUM_CLASSES_ARRAY
+    assert type(f) in NUM_CLASSES_ARRAY 
+    assert type(l) in NUM_CLASSES_ARRAY
+
+    le = l - f or len(range(f, l + 1))
     if n != None and n != le:
         raise ValueError('Specified length doesn\'t match actual length.')
     return int((n or le * (f + l)) / 2)
@@ -212,3 +215,12 @@ def circle_area(radius: int | float):
     """
     assert type(radius) in NUM_CLASSES_ARRAY
     return PI * (radius ** 2)
+def slope_equation(x1: int | float, y1: int | float, x2: int | float, y2: int | float) -> float:
+    """
+    Returns the slope of a line that starts at point (`x1`, `y1`) and ends at point (`x2`, `y2`).
+    """
+    assert type(x1) in NUM_CLASSES_ARRAY
+    assert type(x2) in NUM_CLASSES_ARRAY
+    assert type(y1) in NUM_CLASSES_ARRAY
+    assert type(y2) in NUM_CLASSES_ARRAY
+    return (y2 - y1) / (x2 - x1)
