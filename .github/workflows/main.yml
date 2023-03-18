@@ -1,4 +1,4 @@
-name: santitools CI/CD
+name: Continuous Integration (CI)
 
 on:
   push:
@@ -53,8 +53,10 @@ jobs:
         with:
           name: dist
           path: dist.tar
-  call_publish:
+  release:
     needs: build
-    uses: ./.github/workflows/publish.yml
+    uses: ./.github/workflows/release.yml
     secrets:
       PYPI_AUTH_TOKEN: ${{ secrets.PYPI_AUTH_TOKEN }}
+      GPR_AUTH_TOKEN: ${{ secrets.GPR_AUTH_TOKEN }}
+      GH_TOKEN: ${{ secrets.GPR_AUTH_TOKEN }}
