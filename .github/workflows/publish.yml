@@ -38,7 +38,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4.5.0
         with:
-          version: 3.10.9
+          version: 3.10.1
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
