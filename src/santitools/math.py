@@ -269,3 +269,11 @@ def pendants_equation(*args):
         pass
     warn('santitools.math.pendants_equation is deprecated due to its unclear name. Use santitools.math.slope_formula instead.', DeprecationWarning)
     return slope_formula(*args)
+def average(l: tuple | list | set) -> float:
+    """
+    Finds the average of an iterable with numbers.
+    """
+    assert type(l) in ITER_CLASSES_ARRAY
+    ls = list(l)
+    s = sum(ls)
+    return s / len(ls)

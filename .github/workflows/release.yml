@@ -16,11 +16,16 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.10.1
     - name: Generate tag, release name, and body
       run: |
-        TAG_NAME="v$(jq -r '.version' package.json)"
+        pip install toml 
+        TAG_NAME="v$(python3 get-version.py)"
         RELEASE_NAME="Release $TAG_NAME"
-        BODY=$(sed -n "/## Version $(jq -r '.version' package.json | sed 's/\./\\\./g')/,/##/p" CHANGELOG.md | sed '1d;/^##/d')
+        BODY=$(sed -n "/## Version $(python3 get-version.py | sed 's/\./\\\./g')/,/##/p" CHANGELOG.md | sed '1d;/^##/d')
         echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
         echo "RELEASE_NAME=$RELEASE_NAME" >> $GITHUB_ENV
         echo "$BODY" >> release.md
