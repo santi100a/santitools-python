@@ -15,9 +15,11 @@ EULER = 2.718281828459045
 The Euler constant up to its 16th digit.
 """
 
+
 def sqrt(n: float | int) -> float:
     assert type(n) in NUM_CLASSES_ARRAY
     return n ** 0.5
+
 
 def random(mx: int, mn: int = 0) -> int:
     """
@@ -26,12 +28,14 @@ Returns a pseudo-random integer between `mn` (0 by default) and `mx`.
     assert type(mx) == int and type(mn) == int
     return ri(mn, mx)
 
+
 def randfloat(mx: float, mn: float = 0.0) -> float:
     """
 Returns a pseudo-random floating-point number between `mn` (0.0 by default) and `mx`. 
     """
     assert type(mx) == float and type(mn) == float
     return ra() * (mx - mn) + mn
+
 
 def factorial(n: int | float) -> int:
     """
@@ -43,6 +47,7 @@ It returns the factorial of `n` (`n!`).
         return 1
     return n * factorial(n - 1)
 
+
 def fibonacci(n: int | float) -> int:
     """
 This is a Fibonacci sequence function.
@@ -51,6 +56,7 @@ This is a Fibonacci sequence function.
     if n < 2:
         return n
     return fibonacci(n - 1) + fibonacci(n - 2)
+
 
 def fibonacci_list(length: int) -> list:
     """
@@ -62,16 +68,18 @@ This function returns a list with `length` numbers, following the Fibonacci sequ
         items.insert(len(items), fibonacci(i))
     return items
 
-def point_distance(fx: int | float, fy: int | float, 
-                    sx: int | float, sy: int | float) -> float:
+
+def point_distance(fx: int | float, fy: int | float,
+                   sx: int | float, sy: int | float) -> float:
     """
     This function returns the distance between points (`fx`, `fy`) and (`sx`, `sy`) in the Cartesian plane.
     """
     assert type(fx) in NUM_CLASSES_ARRAY and \
         type(sx) in NUM_CLASSES_ARRAY and \
-            type(fy) in NUM_CLASSES_ARRAY and \
-                type(sy) in NUM_CLASSES_ARRAY
+        type(fy) in NUM_CLASSES_ARRAY and \
+        type(sy) in NUM_CLASSES_ARRAY
     return sqrt(((fx-sx) ** 2) + ((fy-sy) ** 2))
+
 
 def pythagoras(fc: int | float, sc: int | float) -> float:
     """
@@ -82,12 +90,14 @@ def pythagoras(fc: int | float, sc: int | float) -> float:
         type(sc) in NUM_CLASSES_ARRAY
     return sqrt((fc ** 2) + (sc ** 2))
 
+
 def rad_to_deg(rad: int | float) -> float:
     """
     This function returns the equivalent in degrees of `rad`.
     """
     assert type(rad) in NUM_CLASSES_ARRAY
     return (rad * 180.0) / PI
+
 
 def deg_to_rad(deg: float) -> float:
     """
@@ -96,16 +106,18 @@ def deg_to_rad(deg: float) -> float:
     assert type(deg) in NUM_CLASSES_ARRAY
     return (deg / 180.0) * PI
 
+
 def percentage(number: int | float, percent: int | float) -> float:
     """
     Returns the `percent`% of `number`.
     """
     assert type(number) in NUM_CLASSES_ARRAY and \
-    type(percent) in NUM_CLASSES_ARRAY \
+        type(percent) in NUM_CLASSES_ARRAY \
         and (percent >= 0.0)
     return (number * percent) / 100.0
 
-def ratio(n1: float | int, n2: float | int) -> float: 
+
+def ratio(n1: float | int, n2: float | int) -> float:
     """
     Returns the ratio between `n1` and `n2` (that is, the factor you have to multiply `n2`
     with in order to get `n1` as a result).
@@ -117,12 +129,14 @@ def ratio(n1: float | int, n2: float | int) -> float:
     assert type(n1) in NUM_CLASSES_ARRAY and type(n2) in NUM_CLASSES_ARRAY
     return n1 / n2
 
-def randiter(iter: list | tuple | set): 
+
+def randiter(iter: list | tuple | set):
     """
 Returns a pseudo-random item from the list, tuple or set specified as an argument.
     """
     assert type(iter) in ITER_CLASSES_ARRAY
     return iter[random(len(iter) - 1)]
+
 
 def invert(n: float | int) -> float:
     """
@@ -131,6 +145,7 @@ def invert(n: float | int) -> float:
     assert type(n) in NUM_CLASSES_ARRAY
     eq = 1.0 / n == n ** -1.0
     return 1.0 / n if eq else n ** -1
+
 
 def rootn(n: float | int, r: int = 2):
     """
@@ -141,6 +156,7 @@ def rootn(n: float | int, r: int = 2):
     assert r > 0
     return n ** invert(r)
 
+
 def cbrt(n: float | int):
     """
     Returns the cube root of `n`.
@@ -148,12 +164,15 @@ def cbrt(n: float | int):
     assert type(n) in NUM_CLASSES_ARRAY
     return n ** 1/3
 
+
 def miles_to_km(mi: int | float):
     """
     Return the equivalent in kilometers of `mi` miles.
     """
     assert type(mi) in NUM_CLASSES_ARRAY
     return mi * MI_KM_RATIO
+
+
 def km_to_miles(km: int | float):
     """
     Return the equivalent in miles of `km` kilometers.
@@ -161,28 +180,36 @@ def km_to_miles(km: int | float):
     assert type(km) in NUM_CLASSES_ARRAY
     return km / MI_KM_RATIO
 
+
 def ft_to_m(ft: int | float):
     """
     Returns the equivalent in meters of `ft` feet.
     """
     assert type(ft) in NUM_CLASSES_ARRAY
     return ft * FT_M_RATIO
+
+
 def m_to_ft(m: int | float):
     """
     Returns the equivalent in feet of `m` meters.
     """
     assert type(m) in NUM_CLASSES_ARRAY
     return m / MI_KM_RATIO
+
+
 def ft_to_cm(ft: int | float):
     """
     Returns the equivalent in centimeters of `ft` feet.
     """
     return ft_to_m(ft) * 100
+
+
 def cm_to_ft(cm: int | float):
     """
     Returns the equivalent in feet of `cm` centimeters.
     """
-    return m_to_ft(cm / 100) 
+    return m_to_ft(cm / 100)
+
 
 def in_to_cm(inc: int | float):
     """
@@ -190,6 +217,8 @@ def in_to_cm(inc: int | float):
     """
     assert type(inc) in NUM_CLASSES_ARRAY
     return inc * IN_CM_RATIO
+
+
 def cm_to_in(cm: int | float):
     """
     Returns the equivalent in inches of `cm`.
@@ -197,11 +226,12 @@ def cm_to_in(cm: int | float):
     assert type(cm) in NUM_CLASSES_ARRAY
     return cm / IN_CM_RATIO
 
-def arithmetic_progression(f: int | float, l: int | float, n = None) -> int:
+
+def arithmetic_progression(f: int | float, l: int | float, n=None) -> int:
     """
     Returns the sum of all numbers in the range [`f`, `l`].
     """
-    assert type(f) in NUM_CLASSES_ARRAY 
+    assert type(f) in NUM_CLASSES_ARRAY
     assert type(l) in NUM_CLASSES_ARRAY
 
     le = l - f or len(range(f, l + 1))
@@ -209,13 +239,16 @@ def arithmetic_progression(f: int | float, l: int | float, n = None) -> int:
         raise ValueError('Specified length doesn\'t match actual length.')
     return int((n or le * (f + l)) / 2)
 
+
 def circle_area(radius: int | float):
     """
     Returns the area of a circle of radius `radius`.
     """
     assert type(radius) in NUM_CLASSES_ARRAY
     return PI * (radius ** 2)
-def slope_equation(x1: int | float, y1: int | float, x2: int | float, y2: int | float) -> float:
+
+
+def slope_formula(x1: int | float, y1: int | float, x2: int | float, y2: int | float) -> float:
     """
     Returns the slope of a line that starts at point (`x1`, `y1`) and ends at point (`x2`, `y2`).
     """
@@ -224,3 +257,15 @@ def slope_equation(x1: int | float, y1: int | float, x2: int | float, y2: int | 
     assert type(y1) in NUM_CLASSES_ARRAY
     assert type(y2) in NUM_CLASSES_ARRAY
     return (y2 - y1) / (x2 - x1)
+
+
+def pendants_equation(*args):
+    """
+    Deprecated. Use santitools.math.slope_formula instead.
+    """
+    try:
+        from warnings import warn
+    except:
+        pass
+    warn('santitools.math.pendants_equation is deprecated due to its unclear name. Use santitools.math.slope_formula instead.', DeprecationWarning)
+    return slope_formula(*args)
