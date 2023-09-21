@@ -14,8 +14,8 @@ def test_invert():
     assert smath.invert(3) == 0.3333333333333333 # 1 / 3
     assert smath.invert(4) == 0.25 # 1 / 4
     assert smath.invert(4/3) == 0.75 # 3 / 4
-def test_pendants_equation():
-    assert smath.pendants_equation(5, -3, 8, 4) == 2.3333333333333335 # 7 / 3
+def test_slope_formula():
+    assert smath.slope_formula(5, -3, 8, 4) == 2.3333333333333335 # 7 / 3
 
 def test_binet_formula():
     assert smath.binet_formula(65) == 17_167_680_177_565
