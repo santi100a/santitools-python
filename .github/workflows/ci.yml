@@ -74,6 +74,9 @@ jobs:
   publish-pypi:
     needs: release
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    environment: publish
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -89,8 +92,5 @@ jobs:
         run: pip install twine
       - name: Decompress artifact
         run: tar -xf dist.tar
-      - name: Publish with twine
-        run: python3 -m twine upload dist/*
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_AUTH_TOKEN }}
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

@@ -14,10 +14,17 @@ EULER = 2.718281828459045
 """
 The Euler constant up to its 16th digit.
 """
+PHI = (1 + (5 ** 0.5)) / 2
+"""
+The golden ratio.
+"""
 
 def number_of_digits(x: int) -> int:
     from math import log
     return int(log(x, 10)) + 1
+
+def binet_formula(n: int) -> int:
+    return int(((PHI ** n) - 1 / ((-PHI) ** n)) / sqrt(5))
 
 def exp_sine(x: float) -> float:
     return ((EULER ** (x * 1j) - EULER ** (x * -1j)) / 2j).real
