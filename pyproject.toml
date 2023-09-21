@@ -20,3 +20,4 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/santi100a/santitools-python"
 "Bug Tracker" = "https://github.com/santi100a/santitools-python/issues"
+"Funding" = "https://github.com/sponsors/santi100a"
