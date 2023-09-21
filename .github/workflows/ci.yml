@@ -1,0 +1,96 @@
+name: Continuous Integration (CI)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - src/**/*.*
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4.5.0
+        with:
+          python-version: 3.11.2
+
+      - name: Install Pytest
+        run: |
+          pip install pytest==7.2.1
+      - name: Install the project in editable mode
+        run: pip install -e .
+      - name: Run Pytest
+        run: |
+          pytest tests
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install required packages
+        run: pip install build virtualenv
+      - name: Build files
+        run: python3 -m build
+      - name: Package distributions
+        run: tar -cf dist.tar dist
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist.tar
+  release:
+    needs: build
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.11.2
+      - name: Generate tag, release name, and body
+        run: |
+          pip install toml 
+          TAG_NAME="v$(python3 get-version.py)"
+          RELEASE_NAME="Release $TAG_NAME"
+          BODY=$(sed -n "/## Version $(python3 get-version.py | sed 's/\./\\\./g')/,/##/p" CHANGELOG.md | sed '1d;/^##/d')
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+          echo "RELEASE_NAME=$RELEASE_NAME" >> $GITHUB_ENV
+          echo "$BODY" >> release.md
+      - name: Create release
+        uses: ncipollo/release-action@v1.12.0
+        with:
+          allowUpdates: true
+          tag: ${{ env.TAG_NAME }}
+          name: ${{ env.RELEASE_NAME }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          bodyFile: release.md
+          draft: false
+          prerelease: false
+  publish-pypi:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4.5.0
+        with:
+          version: 3.10.9
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: dist
+      - name: Install twine
+        run: pip install twine
+      - name: Decompress artifact
+        run: tar -xf dist.tar
+      - name: Publish with twine
+        run: python3 -m twine upload dist/*
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_AUTH_TOKEN }}

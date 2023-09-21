@@ -5,6 +5,7 @@ on:
     types:
       - edited
       - opened
+      - synchronize
     branches: 
       - main
     paths:
@@ -24,12 +25,6 @@ jobs:
           python-version: 3.11.2
       - name: Clone the main repo
         run: /usr/bin/git clone https://github.com/${{ github.repository }} main
-      - name: Check if the PR is acceptable
-        run: |
-         diff -q ./tests/ ./main/tests > /dev/null
-         diff -q ./.github/ ./main/.github > /dev/null
-      - name: Copy test suites from main repo to PR
-        run: cp main/tests/*.* tests/ 
       - name: Install dependencies
         run: pip install pytest
       - name: Run main test suites

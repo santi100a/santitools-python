@@ -11,6 +11,6 @@ def clear():
         return
     except:
         return
-def bisect(list: list | tuple | set, query):
+def bisect(list, query):
     from iter import bisect
     return bisect(list, query)

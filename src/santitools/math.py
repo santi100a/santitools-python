@@ -15,8 +15,17 @@ EULER = 2.718281828459045
 The Euler constant up to its 16th digit.
 """
 
+def number_of_digits(x: int) -> int:
+    from math import log
+    return int(log(x, 10)) + 1
 
-def sqrt(n: float | int) -> float:
+def exp_sine(x: float) -> float:
+    return ((EULER ** (x * 1j) - EULER ** (x * -1j)) / 2j).real
+
+def exp_cosine(x: float) -> float:
+    return ((EULER**(x * 1j) + EULER ** (x * -1j)) / 2).real
+
+def sqrt(n: float) -> float:
     assert type(n) in NUM_CLASSES_ARRAY
     return n ** 0.5
 
@@ -25,7 +34,7 @@ def random(mx: int, mn: int = 0) -> int:
     """
 Returns a pseudo-random integer between `mn` (0 by default) and `mx`. 
     """
-    assert type(mx) == int and type(mn) == int
+    assert isinstance(mx, int) and isinstance(mn, int)
     return ri(mn, mx)
 
 
@@ -33,22 +42,23 @@ def randfloat(mx: float, mn: float = 0.0) -> float:
     """
 Returns a pseudo-random floating-point number between `mn` (0.0 by default) and `mx`. 
     """
-    assert type(mx) == float and type(mn) == float
+    assert isinstance(mx, float) and isinstance(mn, float)
     return ra() * (mx - mn) + mn
 
 
-def factorial(n: int | float) -> int:
+def factorial(n: int) -> int:
     """
 This is a recursive factorial function.
 It returns the factorial of `n` (`n!`).
     """
-    assert type(n) in NUM_CLASSES_ARRAY
+    assert isinstance(n, int)
+    assert n >= 0
     if n == 0:
         return 1
     return n * factorial(n - 1)
 
 
-def fibonacci(n: int | float) -> int:
+def fibonacci(n: int) -> int:
     """
 This is a Fibonacci sequence function.
     """
@@ -62,15 +72,15 @@ def fibonacci_list(length: int) -> list:
     """
 This function returns a list with `length` numbers, following the Fibonacci sequence.
     """
-    assert type(length) == int
+    assert isinstance(length, int)
     items = []
     for i in range(length):
         items.insert(len(items), fibonacci(i))
     return items
 
 
-def point_distance(fx: int | float, fy: int | float,
-                   sx: int | float, sy: int | float) -> float:
+def point_distance(fx: float, fy: float,
+                   sx: float, sy: float) -> float:
     """
     This function returns the distance between points (`fx`, `fy`) and (`sx`, `sy`) in the Cartesian plane.
     """
@@ -81,7 +91,7 @@ def point_distance(fx: int | float, fy: int | float,
     return sqrt(((fx-sx) ** 2) + ((fy-sy) ** 2))
 
 
-def pythagoras(fc: int | float, sc: int | float) -> float:
+def pythagoras(fc: float, sc: float) -> float:
     """
     This function returns the length of the hypotenuse of a right triangle, the lengths of whose legs
     are `fc` and `sc`.
@@ -91,7 +101,7 @@ def pythagoras(fc: int | float, sc: int | float) -> float:
     return sqrt((fc ** 2) + (sc ** 2))
 
 
-def rad_to_deg(rad: int | float) -> float:
+def rad_to_deg(rad: float) -> float:
     """
     This function returns the equivalent in degrees of `rad`.
     """
@@ -107,7 +117,7 @@ def deg_to_rad(deg: float) -> float:
     return (deg / 180.0) * PI
 
 
-def percentage(number: int | float, percent: int | float) -> float:
+def percentage(number: float, percent: float) -> float:
     """
     Returns the `percent`% of `number`.
     """
@@ -117,7 +127,7 @@ def percentage(number: int | float, percent: int | float) -> float:
     return (number * percent) / 100.0
 
 
-def ratio(n1: float | int, n2: float | int) -> float:
+def ratio(n1: float, n2: float) -> float:
     """
     Returns the ratio between `n1` and `n2` (that is, the factor you have to multiply `n2`
     with in order to get `n1` as a result).
@@ -130,7 +140,7 @@ def ratio(n1: float | int, n2: float | int) -> float:
     return n1 / n2
 
 
-def randiter(iter: list | tuple | set):
+def randiter(iter):
     """
 Returns a pseudo-random item from the list, tuple or set specified as an argument.
     """
@@ -138,7 +148,7 @@ Returns a pseudo-random item from the list, tuple or set specified as an argumen
     return iter[random(len(iter) - 1)]
 
 
-def invert(n: float | int) -> float:
+def invert(n: float) -> float:
     """
     Returns the multiplicative inverse of `n`.
     """
@@ -147,17 +157,16 @@ def invert(n: float | int) -> float:
     return 1.0 / n if eq else n ** -1
 
 
-def rootn(n: float | int, r: int = 2):
+def rootn(n: float, r: int = 2):
     """
     Returns the `r`th root of `n`. Default is square root (`r` = 2). 
     """
     assert type(n) in [*NUM_CLASSES_ARRAY, complex]
-    assert type(r) == int
-    assert r > 0
+    assert isinstance(r, int)
     return n ** invert(r)
 
 
-def cbrt(n: float | int):
+def cbrt(n: float):
     """
     Returns the cube root of `n`.
     """
@@ -165,7 +174,7 @@ def cbrt(n: float | int):
     return n ** 1/3
 
 
-def miles_to_km(mi: int | float):
+def miles_to_km(mi: float):
     """
     Return the equivalent in kilometers of `mi` miles.
     """
@@ -173,7 +182,7 @@ def miles_to_km(mi: int | float):
     return mi * MI_KM_RATIO
 
 
-def km_to_miles(km: int | float):
+def km_to_miles(km: float):
     """
     Return the equivalent in miles of `km` kilometers.
     """
@@ -181,7 +190,7 @@ def km_to_miles(km: int | float):
     return km / MI_KM_RATIO
 
 
-def ft_to_m(ft: int | float):
+def ft_to_m(ft: float):
     """
     Returns the equivalent in meters of `ft` feet.
     """
@@ -189,7 +198,7 @@ def ft_to_m(ft: int | float):
     return ft * FT_M_RATIO
 
 
-def m_to_ft(m: int | float):
+def m_to_ft(m: float):
     """
     Returns the equivalent in feet of `m` meters.
     """
@@ -197,21 +206,21 @@ def m_to_ft(m: int | float):
     return m / MI_KM_RATIO
 
 
-def ft_to_cm(ft: int | float):
+def ft_to_cm(ft: float):
     """
     Returns the equivalent in centimeters of `ft` feet.
     """
     return ft_to_m(ft) * 100
 
 
-def cm_to_ft(cm: int | float):
+def cm_to_ft(cm: float):
     """
     Returns the equivalent in feet of `cm` centimeters.
     """
     return m_to_ft(cm / 100)
 
 
-def in_to_cm(inc: int | float):
+def in_to_cm(inc: float):
     """
     Returns the equivalent in centimeters of `inc`.
     """
@@ -219,7 +228,7 @@ def in_to_cm(inc: int | float):
     return inc * IN_CM_RATIO
 
 
-def cm_to_in(cm: int | float):
+def cm_to_in(cm: float):
     """
     Returns the equivalent in inches of `cm`.
     """
@@ -227,7 +236,7 @@ def cm_to_in(cm: int | float):
     return cm / IN_CM_RATIO
 
 
-def arithmetic_progression(f: int | float, l: int | float, n=None) -> int:
+def arithmetic_progression(f: float, l: float, n=None) -> int:
     """
     Returns the sum of all numbers in the range [`f`, `l`].
     """
@@ -240,7 +249,7 @@ def arithmetic_progression(f: int | float, l: int | float, n=None) -> int:
     return int((n or le * (f + l)) / 2)
 
 
-def circle_area(radius: int | float):
+def circle_area(radius: float):
     """
     Returns the area of a circle of radius `radius`.
     """
@@ -248,7 +257,7 @@ def circle_area(radius: int | float):
     return PI * (radius ** 2)
 
 
-def slope_formula(x1: int | float, y1: int | float, x2: int | float, y2: int | float) -> float:
+def slope_formula(x1: float, y1: float, x2: float, y2: float) -> float:
     """
     Returns the slope of a line that starts at point (`x1`, `y1`) and ends at point (`x2`, `y2`).
     """
@@ -265,11 +274,11 @@ def pendants_equation(*args):
     """
     try:
         from warnings import warn
-    except:
+    except Exception:
         pass
     warn('santitools.math.pendants_equation is deprecated due to its unclear name. Use santitools.math.slope_formula instead.', DeprecationWarning)
     return slope_formula(*args)
-def average(l: tuple | list | set) -> float:
+def average(l) -> float:
     """
     Finds the average of an iterable with numbers.
     """
